@@ -2,5 +2,5 @@
 
 * [Introduction](introduction.md)
 * [Installation](installation.md)
-* Helpers
+* [Helpers](helpers.md)
 
