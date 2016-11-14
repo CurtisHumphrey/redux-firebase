@@ -4,11 +4,13 @@
   * Action add_listener({topic, listener_id})
   * Action remove_listener({topic, listener_id})
   * Selector am_listening(state, {topic})
+  
 * Redux store Thunks
   * remove_listener_and_report({topic, listener_id})(dispatch, getState):bool
     * reports if it was last listener
   * add_listener_and_report({topic, listener_id})(dispatch, getState):bool
     * reports if it was the first listener
+    
 * Helpers
   * generate_listener_id():string
   * snap_to_updater({dispatch, updater:func}):function(snap)
