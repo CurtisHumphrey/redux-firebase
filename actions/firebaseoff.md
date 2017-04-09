@@ -25,5 +25,18 @@
 }
 ```
 
-returns firebase\_ref
+Action can also be create via
+
+```js
+import {firebase_actions} from 'redux-firebase'
+
+// a_ref is a firebase reference
+const a_ref = dispatch(firebase_actions.off(
+  {
+    // meta
+  }
+))
+```
+
+
 
