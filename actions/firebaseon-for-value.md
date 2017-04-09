@@ -1,4 +1,4 @@
-# Once \(only value\)
+## On \(for value\)
 
 ```JSON
 {
@@ -6,7 +6,7 @@
   "properties": {
     "type": {
       "type": "enum",
-      "enum": ["firebase/once"]
+      "enum": ["firebase/on"]
     },
     "meta": {
       "properties": {
