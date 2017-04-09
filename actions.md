@@ -3,10 +3,7 @@
 1. Object with path as key.  Full path with therefore be meta.path + key
 2. Special value `__ID__` will be replace with the "key" part of the path
 
-3. 
-
-
-## Once \(only value\)
+# Once \(only value\)
 
 ```JSON
 {
