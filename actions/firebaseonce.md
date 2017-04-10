@@ -19,7 +19,7 @@
           "type": "string"
         },
         "init_value": {
-          "description": "if this path is null (i.e., mission) this object will be saved there and returned",
+          "description": "if this path is null (i.e., missing) this object will be saved there and returned",
           "type": "object"
         }
       },
