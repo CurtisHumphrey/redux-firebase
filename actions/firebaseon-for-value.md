@@ -37,8 +37,8 @@ Action can also be create via
 ```js
 import {firebase_actions} from 'redux-firebase'
 
-// a_ref is a firebase reference
-const a_ref = dispatch(firebase_actions.on(
+// a_promise is a Promise that returns once the first data is loaded
+const a_promise = dispatch(firebase_actions.on(
   {
     // meta
   }

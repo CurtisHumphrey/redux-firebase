@@ -21,8 +21,7 @@
     "payload": {
       "description": "key value pairs, where the path to each value will be meta.path + push's id + key to store the value",
       "type": "object"
-    },
-    "required": ["type", "meta", "payload"]
+    }
   },
   "type": "object",
   "required": ["type", "meta", "payload"]
@@ -34,7 +33,7 @@ Action can also be create via
 ```js
 import {firebase_actions} from 'redux-firebase'
 
-// a_ref is a firebase reference
+// a_ref is a firebase ThenableReference
 const a_ref = dispatch(firebase_actions.push(
   {
     // payload
