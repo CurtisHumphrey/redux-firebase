@@ -11,7 +11,11 @@
   * [firebase/push](actions/firebasepush.md)
   * [firebase/off](/actions/firebaseoff.md)
   * [firebase/remove](actions/firebaseremove.md)
-  * [Special payload values](special-payload-values.md)
+  * [firebase/login](https://www.gitbook.com/book/curtishumphrey/redux-firebase/edit#)
+  * [firebase/logout](https://www.gitbook.com/book/curtishumphrey/redux-firebase/edit#)
+  * [Special payload values](/actions/special-payload-values.md)
+* [Higher Order Actions](higher-order-actions.md)
+  * [firebase/switch](https://www.gitbook.com/book/curtishumphrey/redux-firebase/edit#)
 
 
 
