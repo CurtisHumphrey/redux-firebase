@@ -15,7 +15,7 @@
   * [firebase/logout](/firebase/logout)
   * [Special payload values](/actions/special-payload-values.md)
 * [Higher Order Actions](higher-order-actions.md)
-  * [firebase/switch](https://www.gitbook.com/book/curtishumphrey/redux-firebase/edit#)
+  * [firebase/switch](/higher-order-actions/firebaseswitch.md)
 
 
 
