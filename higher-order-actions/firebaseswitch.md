@@ -1,4 +1,4 @@
-## Switch
+# Switch
 
 This higher order action switching the location of a on subscription from the "old\_path" to the new "path"
 
