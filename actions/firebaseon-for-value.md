@@ -6,7 +6,7 @@
   "properties": {
     "type": {
       "type": "enum",
-      "enum": ["firebase/switch"]
+      "enum": ["firebase/on"]
     },
     "meta": {
       "properties": {
