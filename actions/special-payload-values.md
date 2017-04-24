@@ -1,6 +1,6 @@
 # Special Payload Values
 
-Beyound the normal firebase special values like `ServerValue.TIMESTAMP`
+Beyond the normal firebase special values like `ServerValue.TIMESTAMP`
 
 ## `__KEY__`
 
@@ -41,8 +41,6 @@ dispatch(firebase_actions.update(
   },
 ))
 ```
-
-
 
 
 
