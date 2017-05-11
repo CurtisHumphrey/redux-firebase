@@ -9,7 +9,7 @@ Special value `__KEY__` will be replace with the "key" part of the path.
 Example:
 
 ```js
-import {firebase_actions, ExtraValue} from 'redux-firebase'
+import {firebase_actions, ExtraValues} from 'redux-firebase'
 
 dispatch(firebase_actions.push(
   {
