@@ -1,6 +1,6 @@
 # Special Payload Values
 
-Beyond the normal firebase special values like `ServerValue.TIMESTAMP`
+Beyond the normal firebase special values like `ServerValue.TIMESTAMP which is also located on ExtraValues as TIMESTAMP`
 
 ## `__KEY__`
 
