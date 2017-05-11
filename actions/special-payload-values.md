@@ -1,6 +1,6 @@
 # Special Payload Values
 
-Beyond the normal firebase special values like `ServerValue.TIMESTAMP which is also located on special_values as TIMESTAMP`
+Beyond the normal firebase special values like `ServerValue.TIMESTAMP which is also located on SPECIAL_VALUES as TIMESTAMP`
 
 ## `__KEY__`
 
@@ -9,7 +9,7 @@ Special value `__KEY__` will be replace with the "key" part of the path.
 Example:
 
 ```js
-import {firebase_actions, special_values} from 'redux-firebase'
+import {firebase_actions, SPECIAL_VALUES} from 'redux-firebase'
 
 dispatch(firebase_actions.push(
   {
