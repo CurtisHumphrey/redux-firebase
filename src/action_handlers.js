@@ -2,6 +2,7 @@ import Firebase from 'firebase'
 import _ from 'lodash'
 
 import {SPECIAL_VALUES} from './actions'
+import {selectors} from './reducer'
 
 const get_root_ref = () => Firebase.database().ref()
 
@@ -23,6 +24,8 @@ handlers.once = ({meta: {path, update_action, init_value}}) => (dispatch, getSta
   })
 }
 handlers.on = ({meta: {path, update_action, init_value, query}}) => (dispatch, getState) => {
+  if (selectors.listeners(getState())[path]) return Promise.resolve()
+
   const this_ref = get_root_ref().child(path)
   let first_time = true
   return new Promise((resolve) => {
