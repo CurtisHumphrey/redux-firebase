@@ -21,7 +21,10 @@ export default (state = initial_state, action = {}) => {
   switch (type) {
     case 'firebase/on': return {
       ...state,
-      [meta.path]: meta.update_action,
+      [meta.path]: {
+        action: meta.update_action,
+        count: state[meta.path] ? state[meta.path].count + 1 : 1,
+      },
     }
     case 'firebase/off': return {
       ...state,

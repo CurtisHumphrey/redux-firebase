@@ -24,7 +24,8 @@ handlers.once = ({meta: {path, update_action, init_value}}) => (dispatch, getSta
   })
 }
 handlers.on = ({meta: {path, update_action, init_value, query}}) => (dispatch, getState) => {
-  if (selectors.listeners(getState())[path]) return Promise.resolve()
+  const state = selectors.listeners(getState())[path]
+  if (state && state.count > 1) return Promise.resolve()
 
   const this_ref = get_root_ref().child(path)
   let first_time = true
