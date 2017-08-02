@@ -30,6 +30,14 @@ export default (state = initial_state, action = {}) => {
       ...state,
       [meta.path]: null,
     }
+    case 'firebase/switch': return {
+      ...state,
+      [meta.old_path]: null,
+      [meta.path]: {
+        action: meta.update_action,
+        count: state[meta.path] ? state[meta.path].count + 1 : 1,
+      },
+    }
   }
   return state
 }

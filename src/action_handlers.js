@@ -67,7 +67,8 @@ handlers.push = ({payload, meta: {path}}) => (dispatch, getState) => {
 }
 handlers.off = ({meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(path)
-  return this_ref.off()
+  this_ref.off()
+  return Promise.resolve()
 }
 handlers.remove = ({meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(path)
@@ -75,8 +76,8 @@ handlers.remove = ({meta: {path}}) => (dispatch, getState) => {
   return Promise.resolve()
 }
 handlers.switch = (action) => (dispatch, getState) => {
-  return handlers.off({meta: {path: action.meta.path.old_path}})
-  .then(() => handlers.on(action))
+  return handlers.off({meta: {path: action.meta.old_path}})(dispatch, getState)
+  .then(() => handlers.on(action)(dispatch, getState))
 }
 
 export default _.mapKeys(handlers, (value, key) => `firebase/${key}`)
