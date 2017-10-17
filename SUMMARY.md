@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Installation](installation.md)
 * [Helpers](helpers.md)
+  * [helpers/clean\_undefineds](/helpers/cleanundefineds.md)
 * [Actions](actions.md)
   * [firebase/once](actions/firebaseonce.md)
   * [firebase/on \(for value\)](actions/firebaseon-for-value.md)

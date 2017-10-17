@@ -1,6 +1,8 @@
-# Notes
+# Helpers for Firebase
 
-All members of 
+Members of `{helpers} from 'redux-firebase'`
+
+* [clean\_undefineds](/helpers/cleanundefineds.md)
 
 * Helpers
 
