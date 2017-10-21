@@ -77,7 +77,7 @@ handlers.remove = ({meta: {path}}) => (dispatch, getState) => {
 }
 handlers.switch = (action) => (dispatch, getState) => {
   return handlers.off({meta: {path: action.meta.old_path}})(dispatch, getState)
-  .then(() => handlers.on(action)(dispatch, getState))
+    .then(() => handlers.on(action)(dispatch, getState))
 }
 
 export default _.mapKeys(handlers, (value, key) => `firebase/${key}`)
