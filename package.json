@@ -1,10 +1,13 @@
 {
   "name": "redux_firebase",
   "version": "0.1.0",
+  "author": "Curtis M. Humphrey, Ph.D.",
+  "license": "MIT",
   "description": "Redux and Firebase connections",
   "main": "src/redux-firebase.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -14,10 +17,11 @@
     "firebase",
     "redux"
   ],
-  "author": "Curtis M. Humphrey, Ph.D.",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CurtisHumphrey/redux-firebase/issues"
   },
-  "homepage": "https://github.com/CurtisHumphrey/redux-firebase#readme"
+  "homepage": "https://github.com/CurtisHumphrey/redux-firebase#readme",
+  "dependencies": {
+    "standard-version": "^4.3.0"
+  }
 }
