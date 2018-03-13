@@ -8,8 +8,32 @@ const get_root_ref = () => Firebase.database().ref()
 
 const handlers = {}
 
-handlers.once = ({meta: {path, update_action, init_value}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path)
+function ref_maker(path, sort = {}) {
+  let this_ref = get_root_ref().child(path)
+
+  if (sort.orderBy) {
+    this_ref = this_ref[`orderBy${sort.orderBy.type}`](_.get(sort, 'orderBy.value'))
+  }
+  if (sort.startAt) {
+    this_ref = this_ref.startAt(sort.startAt)
+  }
+  if (sort.equalTo) {
+    this_ref = this_ref.equalTo(sort.equalTo)
+  }
+  if (sort.endAt) {
+    this_ref = this_ref.endAt(sort.endAt)
+  }
+  if (sort.limitToFirst) {
+    this_ref = this_ref.limitToFirst(sort.limitToFirst)
+  }
+  if (sort.limitToLast) {
+    this_ref = this_ref.limitToLast(sort.limitToLast)
+  }
+  return this_ref
+}
+
+handlers.once = ({meta: {path, update_action, init_value, sort}}) => (dispatch, getState) => {
+  const this_ref = ref_maker(path, sort)
   return this_ref.once('value').then((snap) => {
     let payload = snap.val()
     if (!snap.exists() && init_value) {
@@ -23,11 +47,11 @@ handlers.once = ({meta: {path, update_action, init_value}}) => (dispatch, getSta
     })
   })
 }
-handlers.on = ({meta: {path, update_action, init_value, query}}) => (dispatch, getState) => {
+handlers.on = ({meta: {path, update_action, init_value, sort}}) => (dispatch, getState) => {
   const state = selectors.listeners(getState())[path]
   if (state && state.count > 1) return Promise.resolve()
 
-  const this_ref = get_root_ref().child(path)
+  const this_ref = ref_maker(path, sort)
   let first_time = true
   return new Promise((resolve) => {
     this_ref.on('value', (snap) => {
