@@ -19,7 +19,7 @@
       "required": ["path"]
     },
     "payload": {
-      "description": "key value pairs, wpath to each value will be meta.path + key to store the value",
+      "description": "key value pairs, path to each value will be meta.path + key to store the value",
       "type": "object"
     },
   },
