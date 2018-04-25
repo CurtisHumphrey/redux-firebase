@@ -12,7 +12,12 @@ function ref_maker(path, sort = {}) {
   let this_ref = get_root_ref().child(path)
 
   if (sort.orderBy) {
-    this_ref = this_ref[`orderBy${sort.orderBy.type}`](_.get(sort, 'orderBy.value'))
+    const value = _.get(sort, 'orderBy.value')
+    if (value == null) {
+      this_ref = this_ref[`orderBy${sort.orderBy.type}`]()
+    } else {
+      this_ref = this_ref[`orderBy${sort.orderBy.type}`](value)
+    }
   }
   if (sort.startAt) {
     this_ref = this_ref.startAt(sort.startAt)
