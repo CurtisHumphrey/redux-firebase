@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.2.0...v0.2.1) (2018-04-25)
+
+
+### Bug Fixes
+
+* issue with firebase not wanting any pass value ([b4fda8e](https://github.com/CurtisHumphrey/redux-firebase/commit/b4fda8e))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.1.0...v0.2.0) (2018-03-13)
 
