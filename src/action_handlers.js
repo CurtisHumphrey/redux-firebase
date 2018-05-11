@@ -37,6 +37,11 @@ function ref_maker(path, sort = {}) {
   return this_ref
 }
 
+if_type_dispatch = (dispatch, action) => {
+  if (!action.type) return
+  dispatch(action)
+}
+
 handlers.once = ({meta: {path, update_action, init_value, sort}}) => (dispatch, getState) => {
   const this_ref = ref_maker(path, sort)
   return this_ref.once('value').then((snap) => {
@@ -46,7 +51,7 @@ handlers.once = ({meta: {path, update_action, init_value, sort}}) => (dispatch, 
       payload = init_value
     }
 
-    dispatch({
+    if_type_dispatch(dispatch, {
       type: update_action,
       payload,
     })
@@ -63,7 +68,7 @@ handlers.on = ({meta: {path, update_action, init_value, sort}}) => (dispatch, ge
       if (!snap.exists() && init_value) {
         this_ref.set(init_value)
       } else {
-        dispatch({
+        if_type_dispatch(dispatch, {
           type: update_action,
           payload: snap.val(),
         })
