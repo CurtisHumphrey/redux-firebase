@@ -17,12 +17,13 @@ This higher order action switching the location of a on subscription from the "o
           "type": "string"
         },
         "old_path": {
-          "description": "firebase path that current on is attached",
+          "description": "Firebase path that current on is attached. If none provided this becomes just an on.",
           "type": "string"
         },
         "update_action": {
-          "description": "the name of the redux action to generate when firebase returns the value, 
-            if omited it will use the original value provided in the firebase/on",
+          "description":
+            "The name of the redux action to generate when firebase returns the value. 
+             If none is provided no action is sent",
           "type": "string"
         },
         "init_value": {
@@ -32,7 +33,7 @@ This higher order action switching the location of a on subscription from the "o
         }
       },
       "type": "object",
-      "required": ["path", "old_path"]
+      "required": ["path"]
     }
   },
   "type": "object",

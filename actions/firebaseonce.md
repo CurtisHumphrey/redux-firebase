@@ -15,7 +15,9 @@
           "type": "string"
         },
         "update_action": {
-          "description": "the name of the redux action to generate when firebase returns the value",
+          "description":
+            "The name of the redux action to generate when firebase returns the value. 
+             If none is provided no action is sent",
           "type": "string"
         },
         "init_value": {
@@ -50,7 +52,7 @@
          },
       },
       "type": "object",
-      "required": ["path", "update_action"]
+      "required": ["path"]
     }
   },
   "type": "object",
