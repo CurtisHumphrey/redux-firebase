@@ -37,7 +37,7 @@ function ref_maker(path, sort = {}) {
   return this_ref
 }
 
-if_type_dispatch = (dispatch, action) => {
+const if_type_dispatch = (dispatch, action) => {
   if (!action.type) return
   dispatch(action)
 }
