@@ -110,6 +110,8 @@ handlers.remove = ({meta: {path}}) => (dispatch, getState) => {
   return Promise.resolve()
 }
 handlers.switch = (action) => (dispatch, getState) => {
+  if (!action.meta.old_path) return handlers.on(action)(dispatch, getState)
+
   return handlers.off({meta: {path: action.meta.old_path}})(dispatch, getState)
     .then(() => handlers.on(action)(dispatch, getState))
 }
