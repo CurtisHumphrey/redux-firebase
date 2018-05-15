@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.3.1...v0.3.2) (2018-05-15)
+
+
+### Bug Fixes
+
+* issue with switch not resubscribing correctly ([8a99cea](https://github.com/CurtisHumphrey/redux-firebase/commit/8a99cea))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.3.0...v0.3.1) (2018-05-11)
 
