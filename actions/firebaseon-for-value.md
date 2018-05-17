@@ -24,6 +24,12 @@
           "description": "if this path is null (i.e., missing) this object will be saved there and returned",
           "type": "object"
         },
+        "batch: {
+          "type": "number",
+          "description": 
+            "If provided it will batch in these amounts e.g., if 1000 and have 1500 children, 2 update_action
+             events will be called. Default is get them all"
+        },
         "sort": {
           "type": "object",
           "properties": {
