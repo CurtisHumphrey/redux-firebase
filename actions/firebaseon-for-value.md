@@ -16,12 +16,15 @@
         },
         "update_action": {
           "description": 
-            "The name of the redux action to generate when firebase returns the value. 
+            "The name of the redux action to generate when firebase returns the value.
+             If function provided it will call like dispatch(function(data)). Useful if function is a thunk. 
              If none is provided no action is sent",
-          "type": "string"
+          "types": ["string", "function"],
         },
         "init_value": {
-          "description": "if this path is null (i.e., missing) this object will be saved there and returned",
+          "description": 
+            "if this path is null (i.e., missing) this object will be saved there and returned.
+             This is ingored if batch is used because batch assumed a list structure.",
           "type": "object"
         },
         "batch: {
@@ -55,6 +58,12 @@
               "endAt": {
                 "types": ["string", "number"],
               },
+              "limitToFirst": {
+                "type": "number",
+              },
+              "limitToLast": {
+                "type": "number",
+              }
             },
           },
       },
