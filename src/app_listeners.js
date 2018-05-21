@@ -1,6 +1,8 @@
 import Firebase from 'firebase'
 
 export const auth_listener = (dispatch, getState) => {
+  if (Firebase.auth == null) return
+    
   Firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch({
