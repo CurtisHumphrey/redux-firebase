@@ -21,7 +21,9 @@
     "url": "https://github.com/CurtisHumphrey/redux-firebase/issues"
   },
   "homepage": "https://github.com/CurtisHumphrey/redux-firebase#readme",
-  "dependencies": {
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
     "standard-version": "^4.3.0"
   }
 }

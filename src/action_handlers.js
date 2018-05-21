@@ -37,12 +37,21 @@ function ref_maker(path, sort = {}) {
   return this_ref
 }
 
-const if_type_dispatch = (dispatch, action) => {
-  if (!action.type) return
-  dispatch(action)
+const if_type_dispatch = ({dispatch, update_action, payload}) => {
+  if (!update_action) return
+  if (_.isFunction(update_action)) {
+    dispatch(update_action(payload))
+  } else { 
+    dispatch({
+      type: update_action,
+      payload,
+    })
+  }
 }
 
-handlers.once = ({meta: {path, update_action, init_value, sort}}) => (dispatch, getState) => {
+handlers.once = ({meta: {path, update_action, init_value, batch, sort}}) => (dispatch, getState) => {
+  if (batch) return batch_get({is_on: false, path, update_action, init_value, batch, sort, dispatch, getState})
+
   const this_ref = ref_maker(path, sort)
   return this_ref.once('value').then((snap) => {
     let payload = snap.val()
@@ -51,15 +60,50 @@ handlers.once = ({meta: {path, update_action, init_value, sort}}) => (dispatch, 
       payload = init_value
     }
 
-    if_type_dispatch(dispatch, {
-      type: update_action,
-      payload,
-    })
+    if_type_dispatch({dispatch, update_action, payload})
   })
 }
-handlers.on = ({meta: {path, update_action, init_value, sort}}) => (dispatch, getState) => {
+const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (snap) => {
+  let keys = []
+  snap.forEach((child_snap) => {
+    keys.push(child_snap.key)
+  })
+  if (keys.length > 1) {
+    if_type_dispatch({dispatch, update_action, payload: snap.val()})
+  }
+  if (keys.length < batch) {
+    // end
+    if (is_on) {
+      // continue listening
+      sort.limitToFirst = undefined
+      sort.startAt = keys[keys.length - 1]
+      const ref = ref_maker(path, sort)
+      ref.on('child_added', (snap) => {
+        if_type_dispatch({dispatch, update_action, payload: {[snap.key]: snap.val()}})
+      })
+    }
+    return Promise.resolve()
+  }
+  // need more
+  sort.limitToFirst = batch
+  sort.startAt = keys[keys.length - 1]
+  const ref = ref_maker(path, sort)
+
+  return ref.once('value').then(batch_check({is_on, path, update_action, batch, sort, dispatch}))
+}
+const batch_get = ({is_on, path, update_action, batch, sort = {}, dispatch}) => {
+  sort.limitToFirst = batch
+  sort.orderBy = sort.orderBy || {type: 'Key'}
+  let ref = ref_maker(path, sort)
+  return ref.once('value')
+    .then(batch_check({is_on, path, update_action, batch, sort, dispatch}))
+}
+
+handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispatch, getState) => {
   const state = selectors.listeners(getState())[path]
   if (state && state.count > 1) return Promise.resolve()
+
+  if (batch) return batch_get({is_on: true, path, update_action, init_value, batch, sort, dispatch, getState})
 
   const this_ref = ref_maker(path, sort)
   let first_time = true
@@ -68,10 +112,7 @@ handlers.on = ({meta: {path, update_action, init_value, sort}}) => (dispatch, ge
       if (!snap.exists() && init_value) {
         this_ref.set(init_value)
       } else {
-        if_type_dispatch(dispatch, {
-          type: update_action,
-          payload: snap.val(),
-        })
+        if_type_dispatch({dispatch, update_action, payload: snap.val()})
         if (first_time) {
           first_time = false
           resolve(snap)
