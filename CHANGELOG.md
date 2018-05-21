@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.2.1...v0.4.0) (2018-05-21)
+
+
+### Bug Fixes
+
+* if_type_dispatch not defined correctly ([f2195f3](https://github.com/CurtisHumphrey/redux-firebase/commit/f2195f3))
+* issue with switch not resubscribing correctly ([8a99cea](https://github.com/CurtisHumphrey/redux-firebase/commit/8a99cea))
+
+
+### Features
+
+* added batching, and added action can be a function ([939ca40](https://github.com/CurtisHumphrey/redux-firebase/commit/939ca40))
+* added conditional dispatching for when no action type is provided ([fcca52c](https://github.com/CurtisHumphrey/redux-firebase/commit/fcca52c))
+* if not old_path is provide just do on (makes switch work on first pass) ([1823361](https://github.com/CurtisHumphrey/redux-firebase/commit/1823361))
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.3.1...v0.3.2) (2018-05-15)
 
