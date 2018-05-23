@@ -1,4 +1,4 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
 
 export const auth_listener = (dispatch, getState) => {
   if (Firebase.auth == null) return

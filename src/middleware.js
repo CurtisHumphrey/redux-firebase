@@ -1,4 +1,4 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
 
 import {auth_listener} from './app_listeners'
 import action_handlers from './action_handlers'

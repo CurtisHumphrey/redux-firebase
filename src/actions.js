@@ -1,5 +1,6 @@
+import Firebase from 'firebase/app'
+import 'firebase/database'
 import _ from 'lodash'
-import firebase from 'firebase'
 
 const actions_has_payload = {
   once: false,
@@ -28,5 +29,5 @@ export default _.mapValues(actions_has_payload, (has_payload, name) => {
 
 export const SPECIAL_VALUES = {
   KEY: '__KEY__',
-  TIMESTAMP: firebase.database.ServerValue.TIMESTAMP,
+  TIMESTAMP: Firebase.database.ServerValue.TIMESTAMP,
 }

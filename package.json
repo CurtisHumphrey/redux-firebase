@@ -6,7 +6,7 @@
   "description": "Redux and Firebase connections",
   "main": "src/redux-firebase.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "mocha ./src/*.spec.js -w --recursive --require babel-register --file test_setup.js",
     "release": "standard-version"
   },
   "repository": {
@@ -22,8 +22,14 @@
   },
   "homepage": "https://github.com/CurtisHumphrey/redux-firebase#readme",
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^5.1.1",
     "standard-version": "^4.3.0"
+  },
+  "dependencies": {
+    "firebase": "^5.0.0"
   }
 }

@@ -1,4 +1,5 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
+import 'firebase/database'
 import _ from 'lodash'
 
 import {SPECIAL_VALUES} from './actions'
