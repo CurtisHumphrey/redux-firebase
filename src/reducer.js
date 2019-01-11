@@ -40,7 +40,7 @@ export default (state = initial_state, action = {}) => {
           },
         }
       }
-      let response
+      let response = state
       if (meta.old_path) {
         response = {
           ...state,
