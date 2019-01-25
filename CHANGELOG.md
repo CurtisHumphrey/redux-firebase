@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3"></a>
+## [0.5.3](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.5.2...v0.5.3) (2019-01-25)
+
+
+### Bug Fixes
+
+* moved firebase to peer to prevent different versions in use ([7425f41](https://github.com/CurtisHumphrey/redux-firebase/commit/7425f41))
+
+
+
 <a name="0.5.2"></a>
 ## [0.5.2](https://github.com/CurtisHumphrey/redux-firebase/compare/v0.5.1...v0.5.2) (2019-01-11)
 
