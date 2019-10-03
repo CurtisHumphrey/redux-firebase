@@ -30,7 +30,7 @@
     "standard-version": "^4.3.0"
   },
   "peerDependencies": {
-    "@firebase/app-types": "*",
-    "firebase": "^5.0.0"
+    "@firebase/app-types": "^0.4.4",
+    "firebase": "^7.0.0"
   }
 }

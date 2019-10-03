@@ -38,16 +38,16 @@ function ref_maker(path, sort = {}) {
   return this_ref
 }
 
-const if_type_dispatch = ({dispatch, update_action, payload}) => {
-  if (!update_action) return
-  if (_.isFunction(update_action)) {
-    dispatch(update_action(payload))
-  } else { 
-    dispatch({
-      type: update_action,
-      payload,
-    })
-  }
+const dispatch_response = ({dispatch, update_action: type, payload, path}) => {
+  if (type == undefined) return
+
+  dispatch({
+    type,
+    payload,
+    meta: {
+      path,
+    },
+  })
 }
 
 handlers.once = ({meta: {path, update_action, init_value, batch, sort}}) => (dispatch, getState) => {
@@ -61,7 +61,8 @@ handlers.once = ({meta: {path, update_action, init_value, batch, sort}}) => (dis
       payload = init_value
     }
 
-    if_type_dispatch({dispatch, update_action, payload})
+    dispatch_response({dispatch, update_action, payload, path })
+    return payload
   })
 }
 const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (snap) => {
@@ -70,7 +71,7 @@ const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (sn
     keys.push(child_snap.key)
   })
   if (keys.length > 1) {
-    if_type_dispatch({dispatch, update_action, payload: snap.val()})
+    dispatch_response({dispatch, update_action, path, payload: snap.val()})
   }
   if (keys.length < batch) {
     // end
@@ -80,7 +81,7 @@ const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (sn
       sort.startAt = keys[keys.length - 1]
       const ref = ref_maker(path, sort)
       ref.on('child_added', (snap) => {
-        if_type_dispatch({dispatch, update_action, payload: {[snap.key]: snap.val()}})
+        dispatch_response({dispatch, update_action, path, payload: {[snap.key]: snap.val()}})
       })
     }
     return Promise.resolve()
@@ -108,12 +109,15 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
 
   const this_ref = ref_maker(path, sort)
   let first_time = true
-  return new Promise((resolve) => {
+  const response = new Promise((resolve) => {
     this_ref.on('value', (snap) => {
       if (!snap.exists() && init_value) {
         this_ref.set(init_value)
       } else {
-        if_type_dispatch({dispatch, update_action, payload: snap.val()})
+        dispatch_response({dispatch, update_action, path, payload: snap.val()})
+
+        if (response.callback) dispatch(response.callback(payload))
+
         if (first_time) {
           first_time = false
           resolve(snap)
@@ -121,6 +125,8 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
       }
     })
   })
+  response.on = (callback) => response.callback = callback
+  return response
 }
 handlers.set = ({payload, meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(path)
