@@ -114,7 +114,8 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
       if (!snap.exists() && init_value) {
         this_ref.set(init_value)
       } else {
-        dispatch_response({dispatch, update_action, path, payload: snap.val()})
+        const payload = snap.val()
+        dispatch_response({dispatch, update_action, path, payload})
 
         if (response.callback) dispatch(response.callback(payload))
 
