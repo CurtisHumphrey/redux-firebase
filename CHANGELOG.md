@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.0.1...v1.1.0) (2020-02-28)
+
+
+### Features
+
+* added key as a meta field for once and on ([13485aa](https://github.com/CurtisHumphrey/redux-firebase/commit/13485aa))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.0.0...v1.0.1) (2019-10-18)
 
