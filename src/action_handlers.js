@@ -38,7 +38,7 @@ function ref_maker(path, sort = {}) {
   return this_ref
 }
 
-const dispatch_response = ({dispatch, update_action: type, payload, path}) => {
+const dispatch_response = ({dispatch, update_action: type, payload, path, key}) => {
   if (type == undefined) return
 
   dispatch({
@@ -46,6 +46,7 @@ const dispatch_response = ({dispatch, update_action: type, payload, path}) => {
     payload,
     meta: {
       path,
+      key,
     },
   })
 }
@@ -61,7 +62,7 @@ handlers.once = ({meta: {path, update_action, init_value, batch, sort}}) => (dis
       payload = init_value
     }
 
-    dispatch_response({dispatch, update_action, payload, path })
+    dispatch_response({dispatch, update_action, payload, path, key: snap.key })
     return payload
   })
 }
@@ -71,7 +72,7 @@ const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (sn
     keys.push(child_snap.key)
   })
   if (keys.length > 1) {
-    dispatch_response({dispatch, update_action, path, payload: snap.val()})
+    dispatch_response({dispatch, update_action, path, payload: snap.val(), key: snap.key})
   }
   if (keys.length < batch) {
     // end
@@ -81,7 +82,8 @@ const batch_check = ({is_on, path, update_action, batch, sort, dispatch}) => (sn
       sort.startAt = keys[keys.length - 1]
       const ref = ref_maker(path, sort)
       ref.on('child_added', (snap) => {
-        dispatch_response({dispatch, update_action, path, payload: {[snap.key]: snap.val()}})
+        const key = snap.key
+        dispatch_response({dispatch, update_action, path, payload: {[key]: snap.val()}, key})
       })
     }
     return Promise.resolve()
@@ -115,7 +117,7 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
         this_ref.set(init_value)
       } else {
         const payload = snap.val()
-        dispatch_response({dispatch, update_action, path, payload})
+        dispatch_response({dispatch, update_action, path, payload, key: snap.key})
 
         if (response.callback) dispatch(response.callback(payload))
 
