@@ -7,7 +7,8 @@
   "main": "src/redux-firebase.js",
   "scripts": {
     "test": "mocha ./src/*.spec.js -w --recursive --require babel-register --file test_setup.js",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepare": "install-peers"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "install-peers-cli": "^2.2.0",
     "mocha": "^5.1.1",
     "standard-version": "^4.3.0"
   },
