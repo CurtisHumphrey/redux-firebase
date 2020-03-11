@@ -112,21 +112,26 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
   const this_ref = ref_maker(path, sort)
   let first_time = true
   const response = new Promise((resolve) => {
-    this_ref.on('value', (snap) => {
-      if (!snap.exists() && init_value) {
-        this_ref.set(init_value)
-      } else {
-        const payload = snap.val()
-        dispatch_response({dispatch, update_action, path, payload, key: snap.key})
+    setTimeout( // on is not always async this force it to be
+      () => {
+        this_ref.on('value', (snap) => {
+          if (!snap.exists() && init_value) {
+            this_ref.set(init_value)
+          } else {
+            const payload = snap.val()
+            dispatch_response({dispatch, update_action, path, payload, key: snap.key})
 
-        if (response.callback) dispatch(response.callback(payload))
+            if (response.callback) dispatch(response.callback(payload))
 
-        if (first_time) {
-          first_time = false
-          resolve(snap)
-        }
-      }
-    })
+            if (first_time) {
+              first_time = false
+              resolve(snap)
+            }
+          }
+        })
+      }, 
+      0
+    )
   })
   response.on = (callback) => response.callback = callback
   return response
