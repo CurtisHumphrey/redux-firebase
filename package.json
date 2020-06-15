@@ -9,7 +9,8 @@
     "test": "mocha ./src/*.spec.js -w --recursive --require babel-register --file test_setup.js",
     "release": "standard-version",
     "prepare": "install-peers",
-    "docz": "docz dev"
+    "docz": "docz dev",
+    "docz:build": "docz build"
   },
   "repository": {
     "type": "git",
