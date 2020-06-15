@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.1.1...v1.2.0) (2020-06-15)
+
+
+### Features
+
+* added $uid to path as a special replacement value ([6514b04](https://github.com/CurtisHumphrey/redux-firebase/commit/6514b04))
+* added docz style docs into repo ([5f52dae](https://github.com/CurtisHumphrey/redux-firebase/commit/5f52dae))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.1.0...v1.1.1) (2020-03-11)
 
