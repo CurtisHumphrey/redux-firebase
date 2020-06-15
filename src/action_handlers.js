@@ -9,8 +9,17 @@ const get_root_ref = () => Firebase.database().ref()
 
 const handlers = {}
 
+function make_path(path) {
+  const user = firebase.auth().currentUser
+  const has_$uid = path.includes('$uid')
+  if (user == null && has_$uid) {
+    throw new Error('User is not logged in but is used in a firebase path')
+  }
+  return path.replace(/\$uid/g, user.uid)
+}
+
 function ref_maker(path, sort = {}) {
-  let this_ref = get_root_ref().child(path)
+  let this_ref = get_root_ref().child(make_path(path))
 
   if (sort.orderBy) {
     const value = _.get(sort, 'orderBy.value')
@@ -137,15 +146,15 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
   return response
 }
 handlers.set = ({payload, meta: {path}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path)
+  const this_ref = get_root_ref().child(make_path(path))
   return this_ref.set(payload)
 }
 handlers.update = ({payload, meta: {path}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path)
+  const this_ref = get_root_ref().child(make_path(path))
   return this_ref.update(payload)
 }
 handlers.push = ({payload, meta: {path}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path).push()
+  const this_ref = get_root_ref().child(make_path(path)).push()
   this_ref.then(() => {
     if (_.isEmpty(payload)) {
       return {}
@@ -156,12 +165,12 @@ handlers.push = ({payload, meta: {path}}) => (dispatch, getState) => {
   return this_ref
 }
 handlers.off = ({meta: {path}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path)
+  const this_ref = get_root_ref().child(make_path(path))
   this_ref.off()
   return Promise.resolve()
 }
 handlers.remove = ({meta: {path}}) => (dispatch, getState) => {
-  const this_ref = get_root_ref().child(path)
+  const this_ref = get_root_ref().child(make_path(path))
   this_ref.remove()
   return Promise.resolve()
 }
