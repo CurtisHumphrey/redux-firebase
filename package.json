@@ -1,13 +1,13 @@
 {
   "name": "redux_firebase",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Curtis M. Humphrey, Ph.D.",
   "license": "MIT",
   "description": "Redux and Firebase connections",
   "main": "src/redux-firebase.js",
   "scripts": {
     "test": "mocha ./src/*.spec.js -w --recursive --require babel-register --file test_setup.js",
-    "release": "yarn run docz:build && standard-version",
+    "release": "yarn run docz:build && git add -A && standard-version",
     "prepare": "install-peers",
     "docz": "docz dev",
     "docz:build": "docz build"
