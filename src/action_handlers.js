@@ -10,7 +10,7 @@ const get_root_ref = () => Firebase.database().ref()
 const handlers = {}
 
 function make_path(path) {
-  const user = firebase.auth().currentUser
+  const user = Firebase.auth().currentUser
   const has_$uid = path.includes('$uid')
   if (user == null && has_$uid) {
     throw new Error('User is not logged in but is used in a firebase path')
