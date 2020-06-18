@@ -29,5 +29,6 @@ export default _.mapValues(actions_has_payload, (has_payload, name) => {
 
 export const SPECIAL_VALUES = {
   KEY: '__KEY__',
+  UID: '__UID__',
   TIMESTAMP: Firebase.database.ServerValue.TIMESTAMP,
 }

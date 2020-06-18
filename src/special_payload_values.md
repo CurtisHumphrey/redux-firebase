@@ -19,7 +19,7 @@ import {firebase_actions, SPECIAL_VALUES} from 'redux-firebase'
 dispatch(firebase_actions.push(
   {
     id: '__KEY__', // this works
-    key: special_values.KEY, // so does this
+    key: SPECIAL_VALUES.KEY, // so does this
     name: 'curtis',
   },
   {
@@ -43,6 +43,27 @@ dispatch(firebase_actions.update(
   },
   {
     path: 'something/' + a_ref.key,
+  },
+))
+```
+
+## `__UID__`
+
+Special value `__UID__` will be replace with the user id from firebase.
+
+Example:
+
+```js
+import {firebase_actions, SPECIAL_VALUES} from 'redux-firebase'
+
+dispatch(firebase_actions.push(
+  {
+    uid: '__UID__', // this works
+    user_id: SPECIAL_VALUES.UID, // so does this
+    name: 'curtis',
+  },
+  {
+    path: 'something',
   },
 ))
 ```

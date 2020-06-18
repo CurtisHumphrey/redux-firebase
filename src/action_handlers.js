@@ -9,13 +9,27 @@ const get_root_ref = () => Firebase.database().ref()
 
 const handlers = {}
 
-function make_path(path) {
+function get_uid() {
   const user = Firebase.auth().currentUser
-  const has_$uid = path.includes('$uid')
-  if (user == null && has_$uid) {
+  if (user == null) {
     throw new Error('User is not logged in but is used in a firebase path')
   }
-  return path.replace(/\$uid/g, user.uid)
+  return user.uid
+}
+
+function make_path(path) {
+  if (!path.includes('$uid')) return path
+  return path.replace(/\$uid/g, get_uid())
+}
+
+function transform_payload(payload, ref) {
+  return _.mapValues(payload, (v) => {
+    switch (v) {
+      case SPECIAL_VALUES.KEY: return ref.key
+      case SPECIAL_VALUES.UID: return get_uid()
+      default: return v
+    }
+  })
 }
 
 function ref_maker(path, sort = {}) {
@@ -67,8 +81,8 @@ handlers.once = ({meta: {path, update_action, init_value, batch, sort}}) => (dis
   return this_ref.once('value').then((snap) => {
     let payload = snap.val()
     if (!snap.exists() && init_value) {
-      this_ref.set(init_value)
-      payload = init_value
+      payload = transform_payload(init_value, snap.ref)
+      this_ref.set(payload)
     }
 
     dispatch_response({dispatch, update_action, payload, path, key: snap.key })
@@ -125,7 +139,7 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
       () => {
         this_ref.on('value', (snap) => {
           if (!snap.exists() && init_value) {
-            this_ref.set(init_value)
+            this_ref.set(transform_payload(init_value, this_ref))
           } else {
             const payload = snap.val()
             dispatch_response({dispatch, update_action, path, payload, key: snap.key})
@@ -147,11 +161,11 @@ handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispa
 }
 handlers.set = ({payload, meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(make_path(path))
-  return this_ref.set(payload)
+  return this_ref.set(transform_payload(payload, this_ref))
 }
 handlers.update = ({payload, meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(make_path(path))
-  return this_ref.update(payload)
+  return this_ref.update(transform_payload(payload, this_ref))
 }
 handlers.push = ({payload, meta: {path}}) => (dispatch, getState) => {
   const this_ref = get_root_ref().child(make_path(path)).push()
@@ -159,8 +173,7 @@ handlers.push = ({payload, meta: {path}}) => (dispatch, getState) => {
     if (_.isEmpty(payload)) {
       return {}
     }
-    const real_payload = _.mapValues(payload, (v) => (v === SPECIAL_VALUES.KEY) ? this_ref.key : v)
-    return this_ref.set(real_payload)
+    return this_ref.set(transform_payload(payload, this_ref))
   })
   return this_ref
 }
