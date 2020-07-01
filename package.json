@@ -5,6 +5,9 @@
   "license": "MIT",
   "description": "Redux and Firebase connections",
   "main": "src/redux-firebase.js",
+  "files": [
+    "/src"
+  ],
   "scripts": {
     "test": "mocha ./src/*.spec.js -w --recursive --require babel-register --file test_setup.js",
     "release": "yarn run docz:build && git add -A && standard-version",
