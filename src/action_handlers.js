@@ -22,14 +22,18 @@ function make_path(path) {
   return path.replace(/\$uid/g, get_uid())
 }
 
+function convert_value(v) {
+  switch (v) {
+    case SPECIAL_VALUES.KEY: return ref.key
+    case SPECIAL_VALUES.UID: return get_uid()
+    default: return v
+  }
+}
+
 function transform_payload(payload, ref) {
-  return _.mapValues(payload, (v) => {
-    switch (v) {
-      case SPECIAL_VALUES.KEY: return ref.key
-      case SPECIAL_VALUES.UID: return get_uid()
-      default: return v
-    }
-  })
+  if (_.isObject(payload)) return _.mapValues(payload, convert_value)
+  if (_.isString(payload)) return convert_value(payload)
+  return payload
 }
 
 function ref_maker(path, sort = {}) {
