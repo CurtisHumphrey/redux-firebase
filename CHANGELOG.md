@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.3.2...v1.3.3) (2020-07-07)
+
+
+### Bug Fixes
+
+* ensure ref is passed in converters ([545134b](https://github.com/CurtisHumphrey/redux-firebase/commit/545134b))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.3.1...v1.3.2) (2020-07-01)
 
