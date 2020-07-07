@@ -22,7 +22,7 @@ function make_path(path) {
   return path.replace(/\$uid/g, get_uid())
 }
 
-function convert_value(v) {
+function convert_value(v, ref) {
   switch (v) {
     case SPECIAL_VALUES.KEY: return ref.key
     case SPECIAL_VALUES.UID: return get_uid()
@@ -31,8 +31,8 @@ function convert_value(v) {
 }
 
 function transform_payload(payload, ref) {
-  if (_.isObject(payload)) return _.mapValues(payload, convert_value)
-  if (_.isString(payload)) return convert_value(payload)
+  if (_.isObject(payload)) return _.mapValues(payload, (v) => convert_value(v, ref))
+  if (_.isString(payload)) return convert_value(payload, ref)
   return payload
 }
 
