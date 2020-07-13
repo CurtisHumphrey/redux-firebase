@@ -37,7 +37,7 @@
     "mocha": "^5.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "standard-version": "^4.3.0"
+    "standard-version": "^8.0.1"
   },
   "peerDependencies": {
     "@firebase/app-types": "^0.4.4",
