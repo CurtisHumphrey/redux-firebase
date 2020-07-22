@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.4.0...v1.4.1) (2020-07-22)
+
+
+### Bug Fixes
+
+* not meta just path ([51b8127](https://github.com/CurtisHumphrey/redux-firebase/commit/51b8127))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/CurtisHumphrey/redux-firebase/compare/v1.3.3...v1.4.0) (2020-07-22)
 
