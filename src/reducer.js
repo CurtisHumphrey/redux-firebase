@@ -2,59 +2,49 @@
 // Initial State
 // --------
 
-const initial_state = {}
+const initial_state = {};
 
 // -------
 // Selectors
 // --------
-const BASE = 'firebase'
+const BASE = "firebase";
 
 export const selectors = {
   listeners: (state) => state[BASE],
-}
+};
 
 // ------------------------------------
 // Reducer and Actions
 // ------------------------------------
-export default (state = initial_state, action = {}) => {
-  const {type, meta} = action
-  switch (type) {
-    case 'firebase/on': return {
-      ...state,
-      [meta.path]: {
-        action: meta.update_action,
-        count: state[meta.path] ? state[meta.path].count + 1 : 1,
-      },
-    }
-    case 'firebase/off': return {
-      ...state,
-      [meta.path]: null,
-    }
-    case 'firebase/switch':
-      if (meta.path === meta.old_path) {
-        return {
-          ...state,
-          [meta.path]: {
-            action: meta.update_action,
-            count: 1,
-          },
-        }
-      }
-      let response = state
-      if (meta.old_path) {
-        response = {
-          ...state,
-          [meta.old_path]: null,
-        }
-      }
-      return {
-        ...response,
-        [meta.path]: {
-          action: meta.update_action,
-          count: 1,
+function to_on_state({ state, path, update_action }) {
+  return state[path]
+    ? state
+    : {
+        ...state,
+        [path]: {
+          action: update_action,
         },
-      }
-      break
-  }
-  return state
+      };
 }
+function to_off_state({ state, path }) {
+  return !state[meta.path]
+    ? state
+    : {
+        ...state,
+        [path]: null,
+      };
+}
+export default (state = initial_state, action = {}) => {
+  const { type, meta } = action;
+  switch (type) {
+    case "firebase/on":
+      return to_on_state({ state, ...meta });
+    case "firebase/off":
+      return to_off_state({ state, ...meta });
+    case "firebase/switch":
+      state = to_on_state({ state, ...meta });
+      state = to_off_state({ state, path: meta.old_path });
+      return state;
+  }
+  return state;
+};
