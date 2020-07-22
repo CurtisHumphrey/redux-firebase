@@ -27,7 +27,7 @@ function to_on_state({ state, path, update_action }) {
       };
 }
 function to_off_state({ state, path }) {
-  return !state[meta.path]
+  return !state[path]
     ? state
     : {
         ...state,
