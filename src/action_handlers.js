@@ -132,7 +132,7 @@ const batch_get = ({is_on, path, update_action, batch, sort = {}, dispatch}) => 
 
 handlers.on = ({meta: {path, update_action, init_value, batch, sort}}) => (dispatch, getState) => {
   const state = selectors.listeners(getState())[path]
-  if (state && state.count > 1) return Promise.resolve()
+  if (state) return Promise.resolve()
 
   if (batch) return batch_get({is_on: true, path, update_action, init_value, batch, sort, dispatch, getState})
 
