@@ -8,8 +8,9 @@ const firebase_exchanger = (store) => {
 
   return (next) => (action) => {
     if (action_handlers[action.type] != null) {
+      const response = action_handlers[action.type](action)(store.dispatch, store.getState)
       next(action)
-      return action_handlers[action.type](action)(store.dispatch, store.getState)
+      return response
     }
     return next(action)
   }
