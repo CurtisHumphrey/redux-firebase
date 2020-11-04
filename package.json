@@ -1,6 +1,6 @@
 {
   "name": "redux_firebase",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "author": "Curtis M. Humphrey, Ph.D.",
   "license": "MIT",
   "description": "Redux and Firebase connections",
